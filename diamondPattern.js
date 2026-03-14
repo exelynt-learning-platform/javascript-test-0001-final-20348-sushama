@@ -1,41 +1,39 @@
-let n = 5; // number of rows in top half
+// diamondPattern.js
 
-// Top half
-for (let i = 1; i <= n; i++) {
+// Number of rows in the top half of the diamond
+const DIAMOND_SIZE = 5;
+
+/**
+ * Generates and prints a single line of the hollow diamond
+ * @param {number} spaces - Number of leading spaces
+ * @param {number} stars - Total characters in the line (1 for single star, or hollow)
+ */
+function generateLine(spaces, stars) {
     let line = '';
-    
-    // spaces
-    for (let j = i; j < n; j++) {
+
+    // Add leading spaces
+    for (let i = 0; i < spaces; i++) {
         line += ' ';
     }
 
-    // stars and hollow spaces
-    for (let j = 1; j <= (2*i - 1); j++) {
-        if (j === 1 || j === (2*i - 1)) {
-            line += '*';
+    // Add stars and hollow spaces
+    for (let i = 1; i <= stars; i++) {
+        if (i === 1 || i === stars) {
+            line += '*'; // First and last character in line is a star
         } else {
-            line += ' ';
+            line += ' '; // Hollow space inside
         }
     }
+
     console.log(line);
 }
 
-// Bottom half
-for (let i = n-1; i >= 1; i--) {
-    let line = '';
-    
-    // spaces
-    for (let j = n; j > i; j--) {
-        line += ' ';
-    }
+// Generate top half of the diamond (including middle line)
+for (let i = 1; i <= DIAMOND_SIZE; i++) {
+    generateLine(DIAMOND_SIZE - i, 2 * i - 1);
+}
 
-    // stars and hollow spaces
-    for (let j = 1; j <= (2*i - 1); j++) {
-        if (j === 1 || j === (2*i - 1)) {
-            line += '*';
-        } else {
-            line += ' ';
-        }
-    }
-    console.log(line);
+// Generate bottom half of the diamond
+for (let i = DIAMOND_SIZE - 1; i >= 1; i--) {
+    generateLine(DIAMOND_SIZE - i, 2 * i - 1);
 }
